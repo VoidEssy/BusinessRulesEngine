@@ -1,5 +1,6 @@
 ﻿using RuleEngine.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -27,11 +28,22 @@ namespace RuleEngine
             }
         }
 
-        public static Func<T, bool> CompileRule<T>(Rule r, object targetObj)
+        public static Func<T, bool> CompileRule<T>(Rule r)
         {
-            var paramNode = Expression.Parameter(targetObj.GetType());
+            var paramNode = Expression.Parameter(typeof(T));
             Expression expr = BuildExpression<T>(r, paramNode);
             return Expression.Lambda<Func<T, bool>>(expr, paramNode).Compile();
+        }
+
+        // Technically could use an overload but one is Compile A rule the other is Compile multiple Rules at once
+        public static List<Func<T, bool>> CompileRules<T>(List<Rule> rules)
+        {
+            List<Func<T, bool>> compiledRules = new List<Func<T, bool>>();
+            foreach(var rule in rules)
+            {
+                compiledRules.Add(CompileRule<T>(rule));
+            }
+            return compiledRules;
         }
     }
 }

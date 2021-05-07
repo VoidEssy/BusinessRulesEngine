@@ -14,7 +14,7 @@ namespace Tests
         {
             Product prod = new Product(true, "Book");
             Rule basicRule = new Rule("IsService", "Equal", "true");
-            var TestRule = Engine.CompileRule<Product>(basicRule, prod);
+            var TestRule = Engine.CompileRule<Product>(basicRule);
             var result = TestRule.Invoke(prod);
             Assert.IsTrue(result);
         }
@@ -24,7 +24,7 @@ namespace Tests
         {
             Product prod = new Product(true, "Book");
             Rule basicRule = new Rule("ProductType", "Equal", "Book");
-            var TestRule = Engine.CompileRule<Product>(basicRule, prod);
+            var TestRule = Engine.CompileRule<Product>(basicRule);
             var result = TestRule.Invoke(prod);
             Assert.IsTrue(result);
         }
@@ -34,8 +34,8 @@ namespace Tests
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
             Product prod = new Product(true, "Book");
-            var rule1 = Engine.CompileRule<Product>(rules[0], prod);
-            var rule2 = Engine.CompileRule<Product>(rules[1], prod);
+            var rule1 = Engine.CompileRule<Product>(rules[0]);
+            var rule2 = Engine.CompileRule<Product>(rules[1]);
             var result1 = rule1.Invoke(prod);
             var result2 = rule2.Invoke(prod);
             Assert.IsTrue(result1);
@@ -43,10 +43,19 @@ namespace Tests
         }
 
         [TestMethod]
-        public void EngineRuleSetMultiEvaluationBuildTest()
+        public void EngineCompileMultipleRulesTest()
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
-            Product prod = new Product(true, "Book");
+            var compiledRules = Engine.CompileRules<Product>(rules);
+            Assert.AreEqual(2, compiledRules.Count);
+        }
+
+        [TestMethod]
+        public void EngineEvalAgainstRuleCollectionTest()
+        {
+            List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
+            var compiledRules = Engine.CompileRules<Product>(rules);
+
         }
     }
 }
