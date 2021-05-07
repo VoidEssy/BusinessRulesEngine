@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DomainModels\DomainModels.csproj" />
     <ProjectReference Include="..\RuleEngine\RuleEngine.csproj" />
   </ItemGroup>
 
