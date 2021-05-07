@@ -8,7 +8,13 @@ namespace RuleEngine
 {
     public static class Engine
     {
-
+        /// <summary>
+        /// Builds an expression based on supplied Rule and a Node from Expression tree
+        /// </summary>
+        /// <typeparam name="T">Object type which will be used in generated expression</typeparam>
+        /// <param name="rule">Rule definition for the expression to build from</param>
+        /// <param name="exp">Expression Tree node</param>
+        /// <returns>BinaryExpression or MethodCallExpression</returns>
         public static Expression BuildExpression<T>(Rule rule, ParameterExpression exp)
         {
             var leftHand = Expression.Property(exp, rule.PropertyName);
@@ -43,6 +49,12 @@ namespace RuleEngine
         }
 
         // Technically could use an overload but one is Compile A rule the other is Compile multiple Rules at once
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="rules"></param>
+        /// <returns></returns>
         public static List<Func<T, bool>> CompileRules<T>(List<Rule> rules)
         {
             List<Func<T, bool>> compiledRules = new List<Func<T, bool>>();
