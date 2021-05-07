@@ -24,9 +24,14 @@ namespace DevConsole
                 {
                     Console.WriteLine($"Packaging slip generated for {order.Name}");
                 }
-                else if (Engine.CompileRule<Product>(serviceOrder).Invoke(order))
+                else if (Engine.CompileRule<Product>(serviceOrder).Invoke(order) || Engine.CompileRule<Product>(bookOrder).Invoke(order))
                 {
-                    Console.WriteLine("This is a service");
+                    Console.WriteLine("Comission Payment for Agent generated");
+                }
+
+                if (Engine.CompileRule<Product>(bookOrder).Invoke(order))
+                {
+                    Console.WriteLine($"Duplicate packing slip for the royalty department generated for Book: {order.Name}");
                 }
             }
         }
