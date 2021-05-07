@@ -8,6 +8,7 @@ namespace RuleEngine
 {
     public static class Engine
     {
+
         public static Expression BuildExpression<T>(Rule rule, ParameterExpression exp)
         {
             var leftHand = Expression.Property(exp, rule.PropertyName);
@@ -28,6 +29,12 @@ namespace RuleEngine
             }
         }
 
+        /// <summary>
+        /// Generate a Method / Lambda Expression based on defined rule.
+        /// </summary>
+        /// <typeparam name="T">Type of the object you'll use in the evaluation</typeparam>
+        /// <param name="r">A Rule Definition</param>
+        /// <returns>Compiled Lambda Expression / Dynamically generated method call</returns>
         public static Func<T, bool> CompileRule<T>(Rule r)
         {
             var paramNode = Expression.Parameter(typeof(T));
