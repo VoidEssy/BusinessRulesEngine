@@ -51,11 +51,22 @@ namespace Tests
         }
 
         [TestMethod]
-        public void EngineEvalAgainstRuleCollectionTest()
+        public void EngineEvalAgainstCompiledRuleCollectionTest()
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
+            Product prod = new Product(true, "Book");
             var compiledRules = Engine.CompileRules<Product>(rules);
+            var result = Engine.PassesRules(compiledRules, prod);
+            Assert.IsTrue(result);
+        }
 
+        [TestMethod]
+        public void EngineEvalAgainsRuleCollectionTest()
+        {
+            List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
+            Product prod = new Product(true, "Book");
+            var result = Engine.PassesRules(rules, prod);
+            Assert.IsTrue(result);
         }
     }
 }
