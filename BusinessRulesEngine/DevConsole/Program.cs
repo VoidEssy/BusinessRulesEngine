@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RuleEngine.Models;
+using System;
+using System.Collections.Generic;
 
 namespace DevConsole
 {
@@ -6,7 +8,6 @@ namespace DevConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("NEED CHANGE!");
         }
-    }
+	}
 }
