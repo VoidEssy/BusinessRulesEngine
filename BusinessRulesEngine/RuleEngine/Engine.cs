@@ -29,7 +29,6 @@ namespace RuleEngine
 
         public static Func<T, bool> CompileRule<T>(Rule r, object targetObj)
         {
-            
             var paramNode = Expression.Parameter(targetObj.GetType());
             Expression expr = BuildExpression<T>(r, paramNode);
             return Expression.Lambda<Func<T, bool>>(expr, paramNode).Compile();
