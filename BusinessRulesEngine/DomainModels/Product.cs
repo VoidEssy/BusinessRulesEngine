@@ -5,9 +5,9 @@ namespace DomainModels
     public class Product
     {
         public bool IsService { get; set; }
-        public TypeEnum ProductType { get; set; }
+        public string ProductType { get; set; }
 
-        public Product(bool isService, TypeEnum productType)
+        public Product(bool isService, string productType)
         {
             IsService = isService;
             ProductType = productType;

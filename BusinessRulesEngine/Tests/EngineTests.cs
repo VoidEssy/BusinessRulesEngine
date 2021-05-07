@@ -12,7 +12,7 @@ namespace Tests
         [TestMethod]
         public void EngineBooleanRuleBuildTest()
         {
-            Product prod = new Product(true, TypeEnum.Book);
+            Product prod = new Product(true, "Book");
             Rule basicRule = new Rule("IsService", "Equal", "true");
             var TestRule = Engine.CompileRule<Product>(basicRule, prod);
             var result = TestRule.Invoke(prod);
@@ -22,7 +22,7 @@ namespace Tests
         [TestMethod]
         public void EngineEnumRuleBuildTest()
         {
-            Product prod = new Product(true, TypeEnum.Book);
+            Product prod = new Product(true, "Book");
             Rule basicRule = new Rule("ProductType", "Equal", "Book");
             var TestRule = Engine.CompileRule<Product>(basicRule, prod);
             var result = TestRule.Invoke(prod);
@@ -32,8 +32,8 @@ namespace Tests
         [TestMethod]
         public void EngineRuleSetBuildTest()
         {
-            List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "Book"), new Rule("ProductType", "Equal", "true") };
-            Product prod = new Product(true, TypeEnum.Membership);
+            List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
+            Product prod = new Product(true, "Book");
             var rule1 = Engine.CompileRule<Product>(rules[0], prod);
             var rule2 = Engine.CompileRule<Product>(rules[1], prod);
             var result1 = rule1.Invoke(prod);
