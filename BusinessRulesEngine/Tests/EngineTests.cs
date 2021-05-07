@@ -12,7 +12,7 @@ namespace Tests
         [TestMethod]
         public void EngineBooleanRuleBuildTest()
         {
-            Product prod = new Product(false, "Book", "Animal Farm", "Pruchase");
+            Product prod = new Product(false, "Book", "Animal Farm", "Purchase");
             Rule basicRule = new Rule("IsService", "Equal", "false");
             var TestRule = Engine.CompileRule<Product>(basicRule);
             var result = TestRule.Invoke(prod);
@@ -22,7 +22,7 @@ namespace Tests
         [TestMethod]
         public void EngineEnumRuleBuildTest()
         {
-            Product prod = new Product(false, "Book", "Animal Farm", "Pruchase");
+            Product prod = new Product(false, "Book", "Animal Farm", "Purchase");
             Rule basicRule = new Rule("ProductType", "Equal", "Book");
             var TestRule = Engine.CompileRule<Product>(basicRule);
             var result = TestRule.Invoke(prod);
@@ -33,7 +33,7 @@ namespace Tests
         public void EngineRuleSetBuildTest()
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "false"), new Rule("ProductType", "Equal", "Book") };
-            Product prod = new Product(false, "Book", "Animal Farm", "Pruchase");
+            Product prod = new Product(false, "Book", "Animal Farm", "Purchase");
             var rule1 = Engine.CompileRule<Product>(rules[0]);
             var rule2 = Engine.CompileRule<Product>(rules[1]);
             var result1 = rule1.Invoke(prod);
@@ -54,7 +54,7 @@ namespace Tests
         public void EngineEvalAgainstCompiledRuleCollectionTest()
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "false"), new Rule("ProductType", "Equal", "Book") };
-            Product prod = new Product(false, "Book", "Animal Farm", "Pruchase");
+            Product prod = new Product(false, "Book", "Animal Farm", "Purchase");
             var compiledRules = Engine.CompileRules<Product>(rules);
             var result = Engine.PassesRuleSet(compiledRules, prod);
             Assert.IsTrue(result);
@@ -64,7 +64,7 @@ namespace Tests
         public void EngineEvalAgainsRuleCollectionTest()
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "false"), new Rule("ProductType", "Equal", "Book") };
-            Product prod = new Product(false, "Book", "Animal Farm", "Pruchase");
+            Product prod = new Product(false, "Book", "Animal Farm", "Purchase");
             var result = Engine.PassesRuleSet(rules, prod);
             Assert.IsTrue(result);
         }
