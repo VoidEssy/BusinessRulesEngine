@@ -41,5 +41,12 @@ namespace Tests
             Assert.IsTrue(result1);
             Assert.IsTrue(result2);
         }
+
+        [TestMethod]
+        public void EngineRuleSetMultiEvaluationBuildTest()
+        {
+            List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
+            Product prod = new Product(true, "Book");
+        }
     }
 }
