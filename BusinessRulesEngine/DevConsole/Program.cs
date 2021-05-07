@@ -29,9 +29,6 @@ namespace DevConsole
                     Console.WriteLine("This is a service");
                 }
             }
-
-
-
         }
 
         private static List<Product> GenerateProducts()
@@ -48,6 +45,8 @@ namespace DevConsole
                 new Product(true, "Book", "Animal Farm", "Purchase"),
             };
         }
+
+
     }
 
 }
