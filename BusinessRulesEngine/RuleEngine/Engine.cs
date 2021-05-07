@@ -46,13 +46,13 @@ namespace RuleEngine
             return compiledRules;
         }
 
-        public static bool PassesRules<T>(List<Rule> rules, T targetObject)
+        public static bool PassesRuleSet<T>(List<Rule> rules, T targetObject)
         {
             var rulesForEvaluation = CompileRules<T>(rules);
             return rulesForEvaluation.TrueForAll(x => x.Invoke(targetObject));
         }
 
-        public static bool PassesRules<T>(List<Func<T, bool>> compiledRules, T targetObject)
+        public static bool PassesRuleSet<T>(List<Func<T, bool>> compiledRules, T targetObject)
         {
             return compiledRules.TrueForAll(x => x.Invoke(targetObject));
         }

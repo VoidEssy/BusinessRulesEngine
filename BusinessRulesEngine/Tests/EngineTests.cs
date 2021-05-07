@@ -56,7 +56,7 @@ namespace Tests
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
             Product prod = new Product(true, "Book");
             var compiledRules = Engine.CompileRules<Product>(rules);
-            var result = Engine.PassesRules(compiledRules, prod);
+            var result = Engine.PassesRuleSet(compiledRules, prod);
             Assert.IsTrue(result);
         }
 
@@ -65,7 +65,7 @@ namespace Tests
         {
             List<Rule> rules = new List<Rule> { new Rule("IsService", "Equal", "true"), new Rule("ProductType", "Equal", "Book") };
             Product prod = new Product(true, "Book");
-            var result = Engine.PassesRules(rules, prod);
+            var result = Engine.PassesRuleSet(rules, prod);
             Assert.IsTrue(result);
         }
     }
