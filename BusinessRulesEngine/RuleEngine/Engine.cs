@@ -50,11 +50,11 @@ namespace RuleEngine
 
         // Technically could use an overload but one is Compile A rule the other is Compile multiple Rules at once
         /// <summary>
-        /// 
+        /// Compiles a set of rules read for execution, wrapper around CompileRule method
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="rules"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Object type they are compiled for</typeparam>
+        /// <param name="rules">Rule Definitions</param>
+        /// <returns>List of Compiled Lambda Expressions</returns>
         public static List<Func<T, bool>> CompileRules<T>(List<Rule> rules)
         {
             List<Func<T, bool>> compiledRules = new List<Func<T, bool>>();
@@ -65,12 +65,26 @@ namespace RuleEngine
             return compiledRules;
         }
 
+        /// <summary>
+        /// Based on List of Rule definitions evaluates if target object passes all of them
+        /// </summary>
+        /// <typeparam name="T">Target Object Type</typeparam>
+        /// <param name="rules">Rule definitions</param>
+        /// <param name="targetObject">Target Object</param>
+        /// <returns>Boolean</returns>
         public static bool PassesRuleSet<T>(List<Rule> rules, T targetObject)
         {
             var rulesForEvaluation = CompileRules<T>(rules);
             return rulesForEvaluation.TrueForAll(x => x.Invoke(targetObject));
         }
 
+        /// <summary>
+        /// Based on List of Compiled Lambda expressions will check if the object passes all of them
+        /// </summary>
+        /// <typeparam name="T">Target Object Type</typeparam>
+        /// <param name="compiledRules">Compiled Rules / Lambda Expressions</param>
+        /// <param name="targetObject">Target Object</param>
+        /// <returns></returns>
         public static bool PassesRuleSet<T>(List<Func<T, bool>> compiledRules, T targetObject)
         {
             return compiledRules.TrueForAll(x => x.Invoke(targetObject));
